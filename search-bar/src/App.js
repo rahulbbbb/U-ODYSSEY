@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from './searchBar';
+import SearchBar from './Atom/searchBar';
 import './App.css'
 
 const App = () => {
