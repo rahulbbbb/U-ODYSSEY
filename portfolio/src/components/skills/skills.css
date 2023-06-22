@@ -18,6 +18,31 @@
     margin-bottom: var(--mb-1-5)
 }
 
+.image {
+    width: 250px;
+    height: 250px;
+    margin-left: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation: image__animate 4s ease-in-out infinite;
+  }
+  
+  @keyframes image__animate {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
+
 .skills__box{
     display: flex;
     justify-content: center;

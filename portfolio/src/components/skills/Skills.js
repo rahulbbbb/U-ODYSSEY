@@ -10,8 +10,10 @@ const Skills = () => {
             <span className='section__subtitle'>My Technical Level</span>
             
             <div className='skills__container container grid'>
+                <img className="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE2L7qPVR_Cp6eAGaNVxUri44VE9d2EchNtw&usqp=CAU" alt=""/>
                 <Frontend/>
                 <Backend/>
+                <img className="image" src="https://devabit.com/uploads/node.js-developers-for-hire-devabit.webp" alt=""/>
             </div>
         </section>
     )

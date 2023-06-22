@@ -1,16 +1,79 @@
-import React, {useRef} from 'react'
-import emailjs from '@emailjs/browser';
-import './contact.css'
+import React, { useRef, useState } from 'react';
+import './contact.css';
 
 const Contact = () => {
-    const form = useRef();
+    const formRef = useRef();
 
-    const sendEmail = (e) => {
-        e.preventDefault();
+  const [userData, setUserData] = useState({
+    firstName: "",
+    email: "",
+    message: ""
+  });
 
-        emailjs.sendForm('service_mulnb4f', 'template_59eim7c', form.current, '84C1BjbWeq1gXL15W')
-        e.target.reset()
-    };
+  const [errors, setErrors] = useState({});
+
+  const postUserData = (event) => {
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (userData.email.trim() === "" || !emailRegex.test(userData.email)) {
+      newErrors.email = "Invalid email address";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const submitData = async (event) => {
+    event.preventDefault();
+
+    if (validateForm()) {
+      const { firstName, email, message } = userData;
+
+      try {
+        const response = await fetch('https://portfolio-57661-default-rtdb.firebaseio.com/userDataRecords.json', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            firstName,
+            email,
+            message,
+          })
+        });
+
+        if (response.ok) {
+          setUserData({
+            firstName: '',
+            email: '',
+            message:'',
+          });
+
+          formRef.current.reset();
+
+          alert('Data Stored');
+        } else {
+          alert('Failed to store data');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('An error occurred while submitting the form');
+      }
+    } else {
+      alert('Please fill in all the required fields');
+    }
+  };
+
+  
     return (
         <section className='contact section' id='contact'>
             <h2 className='section__title'>Get In Touch</h2>
@@ -25,7 +88,7 @@ const Contact = () => {
                             <i className='bx bx-mail-send contact__card-icon'></i>
 
                             <h3 className='contact__card-title'>Email</h3>
-                            <span className='contact__card-data'>shaad2209@gmail.com</span>
+                            <span className='contact__card-data'>beingbankoti@gmail.com</span>
 
                             <a href="mailto:shaad2209@gmail.com" className='contact__button'>Write me <i className='bx bx-right-arrow-alt contact_-button-icon'></i></a>
                         </div>
@@ -34,7 +97,7 @@ const Contact = () => {
                             <i className='bx bxl-telegram contact__card-icon'></i>
 
                             <h3 className='contact__card-title'>Telegram</h3>
-                            <span className='contact__card-data'>+916395900278</span>
+                            <span className='contact__card-data'>+918920385156</span>
 
                             <a href="https://t.me/shadmankhan" className='contact__button'>Write me <i className='bx bx-right-arrow-alt contact_-button-icon'></i></a>
                         </div>
@@ -43,24 +106,25 @@ const Contact = () => {
                             <i className='bx bxl-instagram bx contact__card-icon'></i>
 
                             <h3 className='contact__card-title'>Instagram</h3>
-                            <span className='contact__card-data'>shadman_shamshad_khan001</span>
+                            <span className='contact__card-data'>rahul_bankoti</span>
 
-                            <a href="https://www.instagram.com/shadmankhan/" className='contact__button'>Write me <i className='bx bx-right-arrow-alt contact_-button-icon'></i></a>
+                            <a href="https://www.instagram.com/being_bankoti/" className='contact__button'>Write me <i className='bx bx-right-arrow-alt contact_-button-icon'></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div className='contact__content'>
-                    <h3 className='contact__title'>Write me your project</h3>
-
                     <form   action="https://formspree.io/f/moqzbveo"
                           method="POST"
+                          ref={formRef}
                          className='contact__form'>
                         <div className='contact__form-div'>
-                            <label className='contact__form-tag'>Name</label>
-                            <input type="text" name="name" 
+                            <label className='contact__form-tag'>Name of Your Organization</label>
+                            <input type="text" name="firstName" 
                               className='contact__form-input'
-                               placeholder='Enter Your Name' 
+                               placeholder='Enter the Name of Your Organization' 
+                               onChange={postUserData}
+                               value={userData.firstName}
                                 required="true"
                                 autocomplete="off"
                              />
@@ -72,21 +136,24 @@ const Contact = () => {
                              name="email"
                              className='contact__form-input' 
                              placeholder='abc@gmail.com' 
+                             onChange={postUserData}
+                             value={userData.email}
                              required="true"
                              autocomplete="off"
                              />
+                             {errors.email && <span className="error">{errors.email}</span>}
                         </div>
                         <div className='contact__form-div contact__form-area'>
                             <label className='contact__form-tag'>Message</label>
                             <textarea className='contact__form-input'
-                             placeholder='Write Your Project'
+                             placeholder='Write any other relevant information'
                               name="message"
                               id="" cols="30" rows="10"
                               minlength="5"
                               required="true"
                               autocomplete="off"></textarea>
                         </div>
-                        <button href="#contact" className='button button--flex'>Send Message
+                        <button href="#contact" onClick={submitData} className='button button--flex'>Send Message
                             <svg
                                 class="button__icon"
                                 xmlns="http://www.w3.org/2000/svg"

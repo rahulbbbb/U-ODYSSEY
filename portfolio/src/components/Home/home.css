@@ -66,8 +66,8 @@
     box-shadow: inset 0 0 0 9px rgb(255 255 255/30%);
     justify-self: center;
     order: 1;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 400px;
     animation: profile__animate 8s ease-in-out infinite 1s, move__inward_outward 4s linear infinite;
   }
   

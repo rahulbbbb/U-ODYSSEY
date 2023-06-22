@@ -1,6 +1,8 @@
 import React from 'react'
- import AboutImg from '../../assets/profile.jpg' 
+ //import AboutImg from '../../assets/profile.jpg' 
+ import img from '../../assets/img.jpg'
 /* import File from '../../assets' */
+
 /* import Info from './Info' */
 import './about.css'
 
@@ -11,7 +13,7 @@ const About = () => {
             <span className='section__subtitle'>My Introduction</span>
 
             <div className="about__container container grid">
-                <img  src={AboutImg}  alt="about" className='about__img'/>
+                <img  src={img}  alt="about" className='about__img'/>
 
                 <div className='about__data'>
                     {/* <Info/> */}
