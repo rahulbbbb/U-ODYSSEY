@@ -7,18 +7,18 @@ export const Data = [
         id:1,
         image:Image1,
         title: "Shubh Shrivastav",
-        description:"A really good job, all aspects of the project were followed step by step and with good results."
+        projdescription:"good good"
     },
     {
         id:2,
         image:Image2,
         title: "Mohit Gupta",
-        description:"A really good job, all aspects of the project were followed step by step and with good results."
+        projdescription:"A really good job, all aspects of the project were followed step by step and with good results."
     },
     {
-        id:2,
+        id:3,
         image:Image3,
         title: "Sonalika V",
-        description:"A really good job, all aspects of the project were followed step by step and with good results."
+        projdescription:"A really good job, all aspects of the project were followed step by step and with good results."
     }
 ]
