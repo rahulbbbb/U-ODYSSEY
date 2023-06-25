@@ -22,7 +22,9 @@ U-ODYSSEY is a web application designed to assist users in planning their trips 
 
 ![Screenshot 2023-06-25 160457](https://github.com/rahulbbbb/U-ODYSSEY/assets/124687528/494df533-0a39-499b-9043-2cf809afb29a)
 
-## others Libraries used in this project:
+## others Libraries/Features used in this project:
 1. React
-2. React Icons 
-3. React-Router-Dom
+2. Protect Routing
+3. React Icons
+4. Axios
+5. React-Router-Dom
